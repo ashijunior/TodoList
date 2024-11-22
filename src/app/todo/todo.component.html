@@ -1,0 +1,123 @@
+
+
+<div class="container">
+  <div class="header">
+    <h1>
+      <i class="fa fa-check-circle"></i> My To-Do List
+    </h1>
+  </div>
+
+  <div class="minicontainer">
+    <!-- Button fto Add New Tasks -->
+    <div class="btnsearch">
+      <div class="btn">
+        <button type="button" class="btns" (click)="openCreateModal()">Add Task</button>
+      </div>
+      <!--  -->
+      <div class="search-container">
+        <!-- Two-way binding for search text -->
+        <input type="search" class="search" [(ngModel)]="searchText" placeholder="Search..." (input)="applyFilter()">
+        <i class="fa fa-search search-icon"></i>
+      </div>
+    </div>
+  </div>
+
+<!-- Table containing the tasks to do -->
+  <table class="team-table">
+    <thead>
+      <tr>
+        <!-- <th>S/N</th> -->
+        <th>IsDone</th>
+        <th>Task</th>
+        <th>StartDate</th>
+        <th>EndDate</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="filteredRows && filteredRows.length > 0; else noResults">
+        <tr *ngFor="let todo of filteredRows | paginate: { itemsPerPage: itemsPerPage, currentPage: p }; let i = index;" class="team-row">
+          <!-- <td>{{ i + 1 + (p - 1) * itemsPerPage }}</td> -->
+          <td>
+            <input type="checkbox" style="margin-left: 1rem;" [(ngModel)]="todo.isCompleted" (change)="onStatusChange(todo)">
+          </td>
+          <td>{{ todo.taskName }}</td>
+          <td>{{ todo.startDate | date: 'dd/MM/yyy' }}</td>
+          <td>{{ todo.endDate | date: 'dd/MM/yyy' }}</td>
+          <td>
+            <button type="button" class="editbutton" (click)="openEditModal(todo)">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="deletebutton" (click)="deleteTask(todo.id)">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #noResults>
+        <tr>
+          <td colspan="4" class="no-results-message">No Task found...</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event" style="text-align: center;"></pagination-controls>
+
+
+<!-- Create Task Modal -->
+<div id="createModal" class="modal" [ngClass]="{'show': iscreateModalVisible}">
+  <div class="modal-content">
+    <h2 class="modal-title">Create New Task</h2>
+    <div class="modal-body">
+      <!-- Inputs for creating a task -->
+      <label for="taskName">Task Name</label>
+      <input [(ngModel)]="createListName" id="taskName" type="text" />
+
+      <label for="startDate">Start Date</label>
+      <input [(ngModel)]="createListStartDate" id="startDate" type="date" [min]="today" (change)="onStartDateChange()"/>
+
+      <label for="endDate">End Date</label>
+      <input [(ngModel)]="createListEndDate" id="endDate" type="date"  [min]="endDateMin" (change)="onEndDateChange()"/>
+
+<!-- Info message -->
+<p *ngIf="infoMessage" class="info-message">{{ infoMessage }}</p>
+      <div class="btnbtn">
+        <button (click)="saveCreate()" class="createSavebtn">Save</button>
+        <button (click)="closeCreateModal()" class="createClosebtn">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Edit Task Modal -->
+  <div id="editModal" class="modal" [ngClass]="{'show': isEditModalVisible}">
+    <div class="modal-content">
+      <h2 class="modal-title">Edit Task</h2>
+      <div class="modal-body">
+        <!-- Inputs for editing -->
+        <label for="taskName">Task Name</label>
+        <input [(ngModel)]="editListName" id="taskName" type="text" />
+
+        <label for="startDate">Start Date</label>
+        <input [(ngModel)]="editListStartDate" id="startDate" type="date" [min]="today" (change)="onStartDateChange()"/>
+
+        <label for="endDate">End Date</label>
+        <input [(ngModel)]="editListEndDate" id="endDate" type="date"  [min]="endDateMin" (change)="onEndDateChange()"/>
+
+<!-- Info message -->
+<p *ngIf="infoMessage" class="info-message">{{ infoMessage }}</p>
+        <div class="btnbtn">
+          <button (click)="saveEdit()" class="createSavebtn">Save</button>
+          <button (click)="closeEditModal()"  class="createClosebtn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<app-footer></app-footer>
+

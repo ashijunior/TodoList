@@ -1,0 +1,507 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.5);
+  color: #888;
+  background: linear-gradient( 135deg, rgb(22, 177, 228), rgb(15, 124, 161));
+}
+
+
+/* Header */
+.header {
+  text-align: center; /* Center the header */
+  background-color: black;
+  padding: 20px 0; /* Add space around the text */
+  color: white; /* Make the text color white for contrast */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.header h1 {
+  font-size: 2.5rem; /* Make the title bold and prominent */
+  margin: 0; /* Remove default margins */
+  font-family: 'Arial', sans-serif; /* Clean, readable font */
+  letter-spacing: 2px; /* Add some spacing between letters */
+  text-transform: uppercase; /* Make the text all caps */
+}
+
+.header:hover {
+  background-color: rgb(56, 54, 54);
+  transition: background-color 0.3s ease;
+}
+
+
+/* Search and Task button */
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+.search {
+  height: 40px;
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  transition: border-color 0.4s ease-in-out;
+  outline: none;
+}
+
+.search:focus {
+  border-color: dodgerblue;
+}
+
+.search-icon {
+  position: absolute;
+  top: 35%;
+  right: 20px;
+  font-size: large;
+  transform: translateY(-50%);
+  color: #888;
+  transition: color 0.4s ease-in-out;
+}
+
+.search-container:focus-within .search-icon {
+  color: dodgerblue;
+}
+
+.btns {
+  padding: 15px 40px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 12px;
+  background-color: #333;
+  font-size: 16px;
+}
+
+.btns::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+.btns::before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    dodgerblue,
+    deepskyblue,
+    cyan,
+    limegreen,
+    yellow,
+    orange,
+    red,
+    purple,
+    dodgerblue
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  filter: blur(8px);
+  animation: glowing 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.btns:hover::before {
+  opacity: 1;
+}
+
+.minicontainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 88%;
+  margin: 2rem auto;
+}
+
+.btnsearch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+  .minicontainer {
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .btnsearch {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btns {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .search {
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 12px;
+  }
+
+  .search-icon {
+    right: 10px;
+    font-size: medium;
+  }
+}
+
+/* Table */
+.team-table {
+  width: 85%;
+  margin: 1rem auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.team-table th,
+.team-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding-left: 1rem;
+}
+
+.team-table th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.team-table td {
+  color: #333;
+}
+
+/* Adjust Action Column */
+.team-table th:nth-child(5),
+.team-table td:nth-child(5) {
+  text-align: center;
+  padding: 5px;
+}
+
+.team-row:hover {
+  background-color: #f9f9f9;
+}
+
+.no-results-message {
+  text-align: center;
+  padding: 20px;
+  color: #333;
+  background-color: white;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.4);
+  margin: 0;
+}
+
+/* Buttons */
+.editbutton {
+  background-color: #5445a0;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.editbutton:hover {
+  background-color: #493c8b;
+}
+
+.deletebutton {
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 5px;
+  margin-left: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.deletebutton:hover {
+  background-color: #da190b;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .team-table {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .team-table th,
+  .team-table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .team-table th:nth-child(5),
+  .team-table td:nth-child(5) {
+    text-align: center;
+  }
+
+  /* Adjust Action Column */
+.team-table th:nth-child(5),
+.team-table td:nth-child(5) {
+  text-align: center;
+  padding: 5px; /* Reduce padding for action column */
+}
+}
+
+@media (max-width: 480px) {
+  .team-table {
+    display: block;
+    overflow-x: auto; /* Enable horizontal scroll */
+    white-space: nowrap;
+  }
+
+  .team-table th,
+  .team-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .editbutton,
+  .deletebutton {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+
+/* Background overlay (blurs the background) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+  backdrop-filter: blur(5px); /* Blur the background */
+  display: none; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 0;
+}
+
+.modal::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+.modal::before {
+  content: "";
+  background: linear-gradient(
+    135deg,
+    white,
+    dimgray,
+    gray,
+    lightgray,
+    white
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  filter: blur(8px);
+  animation: glowing 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.modal:hover::before {
+  opacity: 1;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-out; /* Smooth fade-in animation */
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin: 10px 0 5px;
+  font-size: 16px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+input[type="date"] {
+  cursor: pointer;
+}
+
+.createSavebtn{
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+  width: 6rem;
+  height: 3rem;
+  float: left;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.createSavebtn:hover {
+  background-color: #0056b3;
+}
+
+.createClosebtn{
+  background-color: #ff0000;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+  width: 6rem;
+  height: 3rem;
+  float: right;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.createClosebtn:hover {
+  background-color: #b30000;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Animation for fading in the modal */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Info Message */
+.info-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+

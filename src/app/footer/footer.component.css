@@ -1,0 +1,42 @@
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+footer{
+  background-color: rgb(11, 11, 11);
+  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.5);
+}
+
+.footerBottom{
+  background-color: black;
+  padding: 20px;
+  text-align: center;
+}
+
+.footerBottom p{
+  color: white;
+}
+
+.designer{
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 100;
+  margin: 0px 5px;
+}
+
+@media (max-width: 700px){
+  .footerNav ul{
+    flex-direction: column;
+  }
+
+  .footerNav ul li{
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+  }
+}
+
