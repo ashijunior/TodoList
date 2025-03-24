@@ -263,6 +263,7 @@ saveCreate(): void {
           title: 'Success',
           text: 'Victory! Your task is locked and loaded!',
         });
+        this.resetCreateForm(); // Clear the input fields after successful creation
       },
       error: (err: any) => {
         console.error('Task creation failed:', err);
