@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoServiceService } from '../Service/todo-service.service';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import { DatePipe } from '@angular/common';
 import { FooterComponent } from "../footer/footer.component";
 
@@ -102,7 +102,7 @@ fetchTodoList(): void {
       },
       error: err => {
         console.error('Error fetching Todo-List:', err);
-        swal({
+        Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Failed to fetch Todo-List!',
@@ -119,7 +119,7 @@ addTodoList(listType: string): void {
         next: (listTypeResponse: any) => {
           console.log('Task added! You are one step closer to greatness.:', listTypeResponse);
           this.fetchTodoList();
-          swal({
+          Swal.fire({
             icon: 'success',
             title: 'Success',
             text: 'Task added! You are one step closer to greatness.',
@@ -127,7 +127,7 @@ addTodoList(listType: string): void {
         },
         error: (err: any) => {
           console.error('Oops! Task not added. Give it another shot!:', err);
-          swal({
+          Swal.fire({
             icon: 'error',
             title: 'Error',
             text: 'Oops! Task not added. Give it another shot!',
@@ -135,7 +135,7 @@ addTodoList(listType: string): void {
         }
       });
   } else {
-    swal({
+    Swal.fire({
       icon: 'error',
       title: 'Error',
       text: 'Please inut Task properly!',
@@ -150,7 +150,7 @@ editTodoList(id: number, updatedTask: any): void {
       next: (updatedProductType: any) => {
         console.log('Task revamped! It’s looking even better now:', updatedProductType);
         this.fetchTodoList();
-        swal({
+        Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'Task revamped! It’s looking even better now.',
@@ -159,7 +159,7 @@ editTodoList(id: number, updatedTask: any): void {
       },
       error: (err: any) => {
         console.error('Bummer! An error occurred. Let us give it another shot!:', err);
-        swal({
+        Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Bummer! An error occurred. Let us give it another shot!',
@@ -176,7 +176,7 @@ deleteTask(id: number): void {
       next: (response: any) => {
         console.log('Poof! Task gone. Like it was never there.');
         this.fetchTodoList();
-        swal({
+        Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'Poof! Task gone. Like it was never there. ',
@@ -184,7 +184,7 @@ deleteTask(id: number): void {
       },
       error: (err: any) => {
         console.error('Error deleting Task:', err);
-        swal({
+        Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Failed to delete Task!',
@@ -203,7 +203,7 @@ onStatusChange(todo: any): void {
       next: (updatedTask) => {
         console.log('Task status updated successfully:', updatedTask);
         // Optionally show a success message (e.g., using SweetAlert)
-        swal({
+        Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'Task status updated!',
@@ -211,7 +211,7 @@ onStatusChange(todo: any): void {
       },
       error: (err) => {
         console.error('Error updating task status:', err);
-        swal({
+        Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Error updating task status!',
@@ -258,7 +258,7 @@ saveCreate(): void {
       next: (response: any) => {
         console.log('Task created successfully:', response);
         this.fetchTodoList();  // Fetch the updated list of tasks
-        swal({
+        Swal.fire({
           icon: 'success',
           title: 'Success',
           text: 'Victory! Your task is locked and loaded!',
@@ -267,7 +267,7 @@ saveCreate(): void {
       },
       error: (err: any) => {
         console.error('Task creation failed:', err);
-        swal({
+        Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Task creation failed. Please try again.',
@@ -275,7 +275,7 @@ saveCreate(): void {
       }
     });
   } else {
-    swal({
+    Swal.fire({
       icon: 'error',
       title: 'Error',
       text: 'Please provide a task name.',
