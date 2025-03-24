@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TodoServiceService {
-  private todoUrl: string = 'http://localhost:5124/api/Todo/';
+  private todoUrl: string = 'https://todolistwebapi20250324215732.azurewebsites.net/api/Todo/';
 
   constructor(private http: HttpClient) { }
 
